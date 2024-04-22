@@ -48,15 +48,15 @@ static FieldInfo* REAL_FIELD_INFO= NULL;
 
 FieldInfo* get_info_real(){
         if (REAL_FIELD_INFO==NULL){
-                REAL_FIELD_INFO = (FieldInfo*) malloc(sizeof(FieldInfo));///
-                REAL_FIELD_INFO->type = "real";
-                REAL_FIELD_INFO->el_size = sizeof(double);
-                REAL_FIELD_INFO->sum_el = real_sum;
-                REAL_FIELD_INFO->mult_el = real_mult;
-                REAL_FIELD_INFO->print_el = real_print;
-                REAL_FIELD_INFO->read_array = read_real_array;
-                REAL_FIELD_INFO->set_zero = real_set_zero;
-                REAL_FIELD_INFO->get_number = real_get_number;
+            REAL_FIELD_INFO = (FieldInfo*) malloc(sizeof(FieldInfo));///
+            REAL_FIELD_INFO->type = "real";
+            REAL_FIELD_INFO->el_size = sizeof(double);
+            REAL_FIELD_INFO->sum_el = real_sum;
+            REAL_FIELD_INFO->mult_el = real_mult;
+            REAL_FIELD_INFO->print_el = real_print;
+            REAL_FIELD_INFO->read_array = read_real_array;
+            REAL_FIELD_INFO->set_zero = real_set_zero;
+            REAL_FIELD_INFO->get_number = real_get_number;
         }
         return REAL_FIELD_INFO;
 }

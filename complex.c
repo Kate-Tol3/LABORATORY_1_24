@@ -61,15 +61,15 @@ static FieldInfo* COMPLEX_FIELD_INFO= NULL;
 
 FieldInfo* get_info_complex(){
         if (COMPLEX_FIELD_INFO==NULL){
-                COMPLEX_FIELD_INFO = (FieldInfo*) malloc(sizeof(FieldInfo)); //!!!!!
-                COMPLEX_FIELD_INFO->type = "complex";
-                COMPLEX_FIELD_INFO->el_size = sizeof(Complex);
-                COMPLEX_FIELD_INFO->sum_el = complex_sum;
-                COMPLEX_FIELD_INFO->mult_el = complex_mult;
-                COMPLEX_FIELD_INFO->print_el = complex_print;
-                COMPLEX_FIELD_INFO->read_array = read_complex_array;
-                COMPLEX_FIELD_INFO->set_zero = complex_set_zero;
-                COMPLEX_FIELD_INFO->get_number = complex_get_number;
+            COMPLEX_FIELD_INFO = (FieldInfo*) malloc(sizeof(FieldInfo)); //!!!!!
+            COMPLEX_FIELD_INFO->type = "complex";
+            COMPLEX_FIELD_INFO->el_size = sizeof(Complex);
+            COMPLEX_FIELD_INFO->sum_el = complex_sum;
+            COMPLEX_FIELD_INFO->mult_el = complex_mult;
+            COMPLEX_FIELD_INFO->print_el = complex_print;
+            COMPLEX_FIELD_INFO->read_array = read_complex_array;
+            COMPLEX_FIELD_INFO->set_zero = complex_set_zero;
+            COMPLEX_FIELD_INFO->get_number = complex_get_number;
 
         }
         return COMPLEX_FIELD_INFO;

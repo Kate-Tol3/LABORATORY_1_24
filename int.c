@@ -47,15 +47,15 @@ static FieldInfo* INT_FIELD_INFO= NULL;
 
 FieldInfo* get_info_int(){
         if (INT_FIELD_INFO==NULL){
-                INT_FIELD_INFO = (FieldInfo*) malloc(sizeof(FieldInfo)); //!!!!!
-                INT_FIELD_INFO->type = "int";
-                INT_FIELD_INFO->el_size = sizeof(int);
-                INT_FIELD_INFO->sum_el = int_sum;
-                INT_FIELD_INFO->mult_el = int_mult;
-                INT_FIELD_INFO->print_el = int_print;
-                INT_FIELD_INFO->read_array = read_int_array;
-                INT_FIELD_INFO->set_zero = int_set_zero;
-                INT_FIELD_INFO->get_number = int_get_number;
+            INT_FIELD_INFO = (FieldInfo*) malloc(sizeof(FieldInfo)); //!!!!!
+            INT_FIELD_INFO->type = "int";
+            INT_FIELD_INFO->el_size = sizeof(int);
+            INT_FIELD_INFO->sum_el = int_sum;
+            INT_FIELD_INFO->mult_el = int_mult;
+            INT_FIELD_INFO->print_el = int_print;
+            INT_FIELD_INFO->read_array = read_int_array;
+            INT_FIELD_INFO->set_zero = int_set_zero;
+            INT_FIELD_INFO->get_number = int_get_number;
 
         }
         return INT_FIELD_INFO;
