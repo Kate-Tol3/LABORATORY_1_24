@@ -10,8 +10,9 @@
 
 #define FLT_EPSILON 1.19209e-07
 
-// TESTING TYPES
+/// Testing types
 
+//int
 void test_int_sum() {
     int v1 = 15;
     int v2 = -200;
@@ -44,6 +45,7 @@ void test_int_mult() {
     free(result);
 }
 
+//real
 void test_real_sum() {
     double v1 = 7.6;
     double v2 = -100.4;
@@ -79,6 +81,7 @@ void test_real_mult() {
     free(result);
 }
 
+//complex
 void test_complex_sum() {
     Complex v1 = {-1000.4628, 568.2478};
     Complex v2 = {329.47843, -2164.0475};
@@ -110,6 +113,7 @@ void test_complex_mult() {
     free(result);
 }
 
+//funtions to start testing
 void test_int_functions(){
     test_int_sum();
     test_int_mult();
@@ -128,6 +132,7 @@ void test_complex_functions(){
 
 /// Testing matrix functions
 
+//sum_matrix
 void test_sum_matrix_int(){
     //int
     FieldInfo* info = get_info_int();
@@ -220,7 +225,7 @@ void test_sum_matrix_complex(){
     free(result);
 }
 
-
+//mult_matrix
 void test_mult_matrix_int(){
     //int
     FieldInfo* info = get_info_int();
@@ -309,7 +314,7 @@ void test_mult_matrix_complex(){
     free(result);
 }
 
-
+//mult_on_number_matrix
 void test_mult_on_number_matrix_int(){
     //int
     FieldInfo* info = get_info_int();
@@ -390,7 +395,7 @@ void test_mult_on_number_matrix_complex(){
     free(result);
 }
 
-
+//transpose_matrix
 void test_transpose_matrix_int(){
     //int
     FieldInfo* info = get_info_int();
@@ -476,7 +481,7 @@ void test_transpose_matrix_complex(){
     free(result);
 }
 
-
+//functions to start testing
 void test_sum_matrix(){
     test_sum_matrix_int();
     test_sum_matrix_real();

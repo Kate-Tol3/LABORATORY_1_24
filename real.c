@@ -15,7 +15,6 @@ void real_mult(const void* v1,const void* v2, void* res){
     memcpy(res, &val, sizeof(double));
 }
 
-
 void real_print(const void* el){
     printf("%.3lf", *((const double*) el));
 }
@@ -33,8 +32,6 @@ void read_real_array(const size_t v,const size_t h, void* elems){
         }
     }
 }
-
-//static void* REAL_ZERO = NULL;
 
 void real_set_zero(void* ptr){
     *(double*)ptr = 0.0;

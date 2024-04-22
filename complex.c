@@ -56,7 +56,6 @@ void complex_get_number(void* ptr){
     scanf("%lf", &(((Complex*)ptr)->img));
 }
 
-
 static FieldInfo* COMPLEX_FIELD_INFO= NULL;
 
 FieldInfo* get_info_complex(){

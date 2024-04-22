@@ -129,7 +129,7 @@ void read_matrix (Matrix* mat){
 }
 
 
-// matrix operation fumctions
+// matrix operation functions
 void sum_matrix (const Matrix* mat1, const Matrix* mat2, Matrix* res){
     // if  (match_matrix_types(mat1, mat2)&& match_matrix_types(mat2, res) && \
     //   match_matrix_size(mat1, mat2) && match_matrix_size(mat2, res)){
