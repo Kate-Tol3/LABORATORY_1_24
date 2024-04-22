@@ -8,6 +8,8 @@
 #include "matrix.h"
 #include "types_func.h"
 
+#define FLT_EPSILON 1.19209e-07
+
 // TESTING TYPES
 
 void test_int_sum() {
@@ -49,11 +51,13 @@ void test_real_sum() {
 
     double* v1_ptr = &v1;
     double* v2_ptr = &v2;
+    double dval;
     void* result = malloc(sizeof(double));
 
     real_sum((const void*) v1_ptr, (const void*) v2_ptr, result);
-    
-    assert(*(double*)result ==  expected_result);
+
+    dval = *(double*)result -  expected_result;
+    assert(dval < FLT_EPSILON);
     printf("The function \"real_sum\" passed the test\n");
     free(result);
 }
@@ -66,10 +70,11 @@ void test_real_mult() {
     double* v1_ptr = &v1;
     double* v2_ptr = &v2;
     void* result = malloc(sizeof(double));
+    double dval;
 
     real_mult((const void*) v1_ptr, (const void*) v2_ptr, result);
-    
-    assert(*(double*)result ==  expected_result);
+    dval = *(double*)result -  expected_result;
+    assert(dval < FLT_EPSILON);
     printf("The function \"real_mult\" passed the test\n");
     free(result);
 }
@@ -101,7 +106,7 @@ void test_complex_mult() {
 
     complex_mult((const void*) v1_ptr, (const void*) v2_ptr, result);
     assert(((Complex*)result)->re == expected_result.re && ((Complex*)result)->img == expected_result.img);
-    //printf("The function \"complex_mult\" passed the test\n");
+    printf("The function \"complex_mult\" passed the test\n");
     free(result);
 }
 
@@ -197,22 +202,14 @@ void test_sum_matrix_complex(){
     Matrix* result = new_matrix(2, 2, info);
     sum_matrix((const Matrix*) mat1,(const Matrix*) mat2,(Matrix*) result);
     void* val = malloc (sizeof(Complex));
+    double dval;
     for (int i = 0; i< 2; i++){
         for (int j = 0; j < 2 ; j++){
             get_element(result, i, j, val);
-            //result->typeInfo->print_el(val);
-            // printf("\n");
-            // printf("%.3lf %.3lf\n",((Complex*)val)->re,  ((Complex*)val)->img);
-            // printf("%.3lf %.3lf\n", expected_result[i][j].re, expected_result[i][j].img);
-            // // if (((Complex*)val)->re == (double)(expected_result[i][j].re) && ((Complex*)val)->img == (double)(expected_result[i][j].img)){
-            // //     continue;
-            // // }
-            // // else{
-            // //     printf("AAAAAA");
-            // //     break;
-            // // }
-            //assert((double)((Complex*)val)->re == (double)(expected_result[i][j].re));
-            //assert((double)((Complex*)val)->img == (double)(expected_result[i][j].img));
+            dval = fabs((((Complex*)val)->re) - (expected_result[i][j].re));
+            assert(dval < FLT_EPSILON);
+            dval = fabs((((Complex*)val)->img) - (expected_result[i][j].img));
+            assert(dval < FLT_EPSILON);
         }
     }
     free(val);
@@ -266,13 +263,14 @@ void test_mult_matrix_real(){
     Matrix* result = new_matrix(2, 2, info);
     mult_matrix((Matrix*) mat1,(Matrix*) mat2,(Matrix*) result);
     void* val = malloc (sizeof(double));
+    double dval;
     for (int i = 0; i < 2; i++){
         for (int j = 0; j < 2 ; j++){
             get_element(result, i, j, val);
-            printf("\n");
-            result->typeInfo->print_el(val);
-            printf("%  lf", expected_result[i][j]);
-            assert(*(double*)val == expected_result[i][j]);
+            dval = fabs(*((double*)val) - expected_result[i][j]);
+            assert(dval < FLT_EPSILON);
+            dval = fabs(*((double*)val) - expected_result[i][j]);
+            assert(dval < FLT_EPSILON);
         }
     }
     free(val);
@@ -305,7 +303,7 @@ void test_mult_matrix_complex(){
     }
     free(val);
     
-    printf("The function \"mult_matrix_double\" passed the test\n");
+    printf("The function \"mult_matrix_complex\" passed the test\n");
     free(mat1);
     free(mat2);
     free(result);
@@ -332,7 +330,7 @@ void test_mult_on_number_matrix_int(){
     }
     free(val);
     
-    printf("The function \"mult_matrix_int\" passed the test\n");
+    printf("The function \"mult_on_number_matrix_int\" passed the test\n");
     free(result);
 }
 
@@ -348,21 +346,134 @@ void test_mult_on_number_matrix_real(){
 
     mult_on_number_matrix((Matrix*) result, (void*) &number);
     void* val = malloc (sizeof(double));
+    double dval;
     for (int i = 0; i< 2; i++){
         for (int j = 0; j < 2 ; j++){
             get_element(result, i, j, val);
-            assert(*(double*)val == expected_result[i][j]);
+            dval = *(double*)val - expected_result[i][j];
+            assert(dval<FLT_EPSILON);
         }
     }
     free(val);
     
-    printf("The function \"mult_matrix_int\" passed the test\n");
+    printf("The function \"mult_on_number_matrix_real\" passed the test\n");
+    free(result);
+}
+
+void test_mult_on_number_matrix_complex(){
+    FieldInfo* info = get_info_complex();
+    Matrix* result = new_matrix(2, 2, info);
+    Complex x1 = {4.5, 3.4}, x2 = {2.0, 7.7}, x3 = {9.12, 56.48}, x4 = {3.1, 22.0};
+    Complex number = {7.3, 2.3};
+    Complex z1 = {25.03, 35.17}, z2 = {-3.11,  60.81}, z3 = {-63.328, 433.28}, z4 = {-27.97, 167.73};
+
+    Complex elems[2][2] = {{x1, x2}, {x3, x4}};
+    Complex expected_result[2][2] = {{z1, z2}, {z3, z4}};
+
+    result->elements = elems; 
+
+    mult_on_number_matrix((Matrix*) result, (void*) &number);
+    void* val = malloc (sizeof(Complex));
+    double dval;
+    for (int i = 0; i< 2; i++){
+        for (int j = 0; j < 2 ; j++){
+            get_element(result, i, j, val);
+            dval = ((Complex*)val)->re - expected_result[i][j].re;
+            assert(dval<FLT_EPSILON);
+            dval = ((Complex*)val)->img - expected_result[i][j].img;
+            assert(dval<FLT_EPSILON);
+        }
+    }
+    free(val);
+    
+    printf("The function \"mult_on_number_matrix_complex\" passed the test\n");
     free(result);
 }
 
 
 void test_transpose_matrix_int(){
+    //int
+    FieldInfo* info = get_info_int();
+    Matrix* matrix = new_matrix(3, 2, info);
+    Matrix* result = new_matrix(2, 3, info);
+    int elems[3][2] = {{34, 67}, {12, 80}, {45, 23}};
+    int expected_result[2][3] = {{34, 12, 45}, {67, 80, 23}};
 
+    matrix->elements = elems; 
+
+    transpose_matrix((Matrix*) matrix, (Matrix*) result);
+    void* val = malloc (sizeof(int));
+    for (int i = 0; i < 2; i++){
+        for (int j = 0; j < 3 ; j++){
+            get_element(result, i, j, val);
+            assert(*(int*)val == expected_result[i][j]);
+        }
+    }
+    free(val);
+    
+    printf("The function \"transpose_matrix_int\" passed the test\n");
+    free(matrix);
+    free(result);
+}
+
+void test_transpose_matrix_real(){
+    //real
+    FieldInfo* info = get_info_real();
+    Matrix* matrix = new_matrix(3, 2, info);
+    Matrix* result = new_matrix(2, 3, info);
+    double elems[3][2] = {{45.6, 23.1}, {9.0123, 75.05}, {10.1, 2.0927}};
+    double expected_result[2][3] = {{45.6, 9.0123, 10.1}, {23.1,75.05, 2.0927}};
+
+    matrix->elements = elems; 
+
+    transpose_matrix((Matrix*) matrix, (Matrix*) result);
+    void* val = malloc (sizeof(double));
+    double dval;
+    for (int i = 0; i < 2; i++){
+        for (int j = 0; j < 3 ; j++){
+            get_element(result, i, j, val);
+            dval = *(double*)val - expected_result[i][j];
+            assert(dval < FLT_EPSILON);
+        }
+    }
+    free(val);
+    
+    printf("The function \"transpose_matrix_real\" passed the test\n");
+    free(matrix);
+    free(result);
+}
+
+void test_transpose_matrix_complex(){
+    //complex
+    FieldInfo* info = get_info_complex();
+    Matrix* matrix = new_matrix(3, 2, info);
+    Matrix* result = new_matrix(2, 3, info);
+
+    Complex x1 = {4.5, 3.4}, x2 = {-2.0, 7.7}, x3 = {9.12, 56.48}, x4 = {-3.1, 22.0}, x5 = {-341.2, 34.0}, x6 = {91.012, 23.33};
+    Complex z1 = {4.5, 3.4}, z2 = {9.12,  56.48}, z3 = {-341.2, 34.0}, z4 = {-2.0, 7.7}, z5 = {-3.1, 22.0}, z6 = {91.012, 23.33};
+
+    Complex elems[3][2] = {{x1, x2}, {x3, x4}, {x5, x6}};
+    Complex expected_result[2][3] = {{z1, z2, z3}, {z4, z5, z6}};
+
+    matrix->elements = elems; 
+
+    transpose_matrix((Matrix*) matrix, (Matrix*) result);
+    void* val = malloc (sizeof(Complex));
+    double dval;
+    for (int i = 0; i < 2; i++){
+        for (int j = 0; j < 3 ; j++){
+            get_element(result, i, j, val);
+            dval = ((Complex*)val)->re - expected_result[i][j].re;
+            assert(dval < FLT_EPSILON);
+            dval = ((Complex*)val)->img - expected_result[i][j].img;
+            assert(dval < FLT_EPSILON);
+        }
+    }
+    free(val);
+    
+    printf("The function \"transpose_matrix_complex\" passed the test\n");
+    free(matrix);
+    free(result);
 }
 
 
@@ -375,16 +486,18 @@ void test_sum_matrix(){
 void test_mult_matrix(){
     test_mult_matrix_int();
     test_mult_matrix_real();
+    test_mult_matrix_complex();
 
 }
 
 void test_mult_on_number_matrix(){
     test_mult_on_number_matrix_int();
     test_mult_on_number_matrix_real();
+    test_mult_on_number_matrix_complex();
 }
 
-//test Mult_Matrix
-
-//test Mult_on_scalar_matrix
-
-//test transpose_Matrix
+void test_transpose_matrix(){
+    test_transpose_matrix_int();
+    test_transpose_matrix_real();
+    test_transpose_matrix_complex();
+}

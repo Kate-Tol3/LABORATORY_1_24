@@ -209,4 +209,5 @@ int main(){
     test_sum_matrix();
     test_mult_matrix();
     test_mult_on_number_matrix();
+    test_transpose_matrix();
 }
