@@ -24,7 +24,7 @@ void test_int_sum() {
     int_sum((const void*) v1_ptr, (const void*) v2_ptr, result);
     
     assert(*(int*)result ==  expected_result);
-    printf("The function \"int_sum\" passed the test\n");
+    //printf("The function \"int_sum\" passed the test\n");
     free(result);
 }
 
@@ -40,7 +40,7 @@ void test_int_mult() {
     int_mult((const void*) v1_ptr, (const void*) v2_ptr, result);
     
     assert(*(int*)result ==  expected_result);
-    printf("The function \"mult_sum\" passed the test\n");
+    //printf("The function \"mult_sum\" passed the test\n");
     free(result);
 }
 
@@ -58,7 +58,7 @@ void test_real_sum() {
 
     dval = *(double*)result -  expected_result;
     assert(dval < FLT_EPSILON);
-    printf("The function \"real_sum\" passed the test\n");
+ //   printf("The function \"real_sum\" passed the test\n");
     free(result);
 }
 
@@ -75,7 +75,7 @@ void test_real_mult() {
     real_mult((const void*) v1_ptr, (const void*) v2_ptr, result);
     dval = *(double*)result -  expected_result;
     assert(dval < FLT_EPSILON);
-    printf("The function \"real_mult\" passed the test\n");
+   // printf("The function \"real_mult\" passed the test\n");
     free(result);
 }
 
@@ -91,7 +91,7 @@ void test_complex_sum() {
     complex_sum((const void*) v1_ptr, (const void*) v2_ptr, result);
     
     assert(((Complex*)result)->re == expected_result.re && ((Complex*)result)->img == expected_result.img);
-    printf("The function \"complex_sum\" passed the test\n");
+    //printf("The function \"complex_sum\" passed the test\n");
     free(result);
 }
 
@@ -106,7 +106,7 @@ void test_complex_mult() {
 
     complex_mult((const void*) v1_ptr, (const void*) v2_ptr, result);
     assert(((Complex*)result)->re == expected_result.re && ((Complex*)result)->img == expected_result.img);
-    printf("The function \"complex_mult\" passed the test\n");
+   // printf("The function \"complex_mult\" passed the test\n");
     free(result);
 }
 
@@ -150,7 +150,7 @@ void test_sum_matrix_int(){
     }
     free(val);
     
-    printf("The function \"sum_matrix_int\" passed the test\n");
+  //  printf("The function \"sum_matrix_int\" passed the test\n");
     free(mat1);
     free(mat2);
     free(result);
@@ -178,7 +178,7 @@ void test_sum_matrix_real(){
     }
     free(val);
     
-    printf("The function \"sum_matrix_real\" passed the test\n");
+  //  printf("The function \"sum_matrix_real\" passed the test\n");
     free(mat1);
     free(mat2);
     free(result);
@@ -214,7 +214,7 @@ void test_sum_matrix_complex(){
     }
     free(val);
     
-    printf("The function \"sum_matrix_complex\" passed the test\n");
+   // printf("The function \"sum_matrix_complex\" passed the test\n");
     free(mat1);
     free(mat2);
     free(result);
@@ -243,7 +243,7 @@ void test_mult_matrix_int(){
     }
     free(val);
     
-    printf("The function \"mult_matrix_int\" passed the test\n");
+   // printf("The function \"mult_matrix_int\" passed the test\n");
     free(mat1);
     free(mat2);
     free(result);
@@ -275,14 +275,14 @@ void test_mult_matrix_real(){
     }
     free(val);
     
-    printf("The function \"mult_matrix_real\" passed the test\n");
+  //  printf("The function \"mult_matrix_real\" passed the test\n");
     free(mat1);
     free(mat2);
     free(result);
 }
 
 void test_mult_matrix_complex(){
-    //int
+    //complex
     FieldInfo* info = get_info_int();
     Matrix* mat1 = new_matrix(2, 2, info);
     Matrix* mat2 = new_matrix(2, 2, info);
@@ -303,7 +303,7 @@ void test_mult_matrix_complex(){
     }
     free(val);
     
-    printf("The function \"mult_matrix_complex\" passed the test\n");
+   // printf("The function \"mult_matrix_complex\" passed the test\n");
     free(mat1);
     free(mat2);
     free(result);
@@ -330,7 +330,7 @@ void test_mult_on_number_matrix_int(){
     }
     free(val);
     
-    printf("The function \"mult_on_number_matrix_int\" passed the test\n");
+   // printf("The function \"mult_on_number_matrix_int\" passed the test\n");
     free(result);
 }
 
@@ -356,7 +356,7 @@ void test_mult_on_number_matrix_real(){
     }
     free(val);
     
-    printf("The function \"mult_on_number_matrix_real\" passed the test\n");
+    //printf("The function \"mult_on_number_matrix_real\" passed the test\n");
     free(result);
 }
 
@@ -386,7 +386,7 @@ void test_mult_on_number_matrix_complex(){
     }
     free(val);
     
-    printf("The function \"mult_on_number_matrix_complex\" passed the test\n");
+   // printf("The function \"mult_on_number_matrix_complex\" passed the test\n");
     free(result);
 }
 
@@ -411,7 +411,7 @@ void test_transpose_matrix_int(){
     }
     free(val);
     
-    printf("The function \"transpose_matrix_int\" passed the test\n");
+   // printf("The function \"transpose_matrix_int\" passed the test\n");
     free(matrix);
     free(result);
 }
@@ -438,7 +438,7 @@ void test_transpose_matrix_real(){
     }
     free(val);
     
-    printf("The function \"transpose_matrix_real\" passed the test\n");
+   // printf("The function \"transpose_matrix_real\" passed the test\n");
     free(matrix);
     free(result);
 }
@@ -471,7 +471,7 @@ void test_transpose_matrix_complex(){
     }
     free(val);
     
-    printf("The function \"transpose_matrix_complex\" passed the test\n");
+   // printf("The function \"transpose_matrix_complex\" passed the test\n");
     free(matrix);
     free(result);
 }

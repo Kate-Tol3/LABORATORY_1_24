@@ -5,6 +5,7 @@
 #include <string.h>
 #include <stdlib.h>
 
+
 //elemet setter and getter
 void get_element(const Matrix* mat,const size_t i,const size_t j,  void* val){
     if ((mat->size_v >= i) && (mat->size_h >= j)){

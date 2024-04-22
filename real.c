@@ -16,8 +16,8 @@ void real_mult(const void* v1,const void* v2, void* res){
 }
 
 
-void real_print(void* el){
-    printf("%.3lf", *((double*) el));
+void real_print(const void* el){
+    printf("%.3lf", *((const double*) el));
 }
 
 void read_real_array(const size_t v,const size_t h, void* elems){

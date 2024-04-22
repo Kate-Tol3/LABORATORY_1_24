@@ -30,8 +30,8 @@ void read_complex_array(const size_t v,const size_t h, void* elems){
     }
 }
 
-void complex_print(void* el){
-    Complex* elc = el;
+void complex_print(const void* el){
+    const Complex* elc = el;
     if ((elc->img) > 0){
         printf("%.3lf + %.3lfi", elc->re, elc->img);
     }

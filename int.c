@@ -31,11 +31,9 @@ void read_int_array(const size_t v,const size_t h, void* elems){
     }
 }
 
-void int_print(void* el){
-    printf("%7d", *((int*) el));
+void int_print(const void* el){
+    printf("%7d", *((const int*) el));
 }
-
-//static void* INT_ZERO = NULL;
 
 void int_set_zero(void* ptr){
     *(int*)ptr = 0;
